@@ -12,8 +12,7 @@ impl Arena {
             .stdout(Stdio::piped())
             .output()
             .unwrap();
-        let stdout = String::from_utf8(output.stdout).unwrap();
-        stdout
+        String::from_utf8(output.stdout).unwrap()
     }
 
     pub fn run(filler: &str, args: &mut [&str]) -> Arena {
@@ -21,7 +20,7 @@ impl Arena {
         let mut data = vec![];
         let mut index = 0;
         let mut is_begun = false;
-        for line in stdout.split("\n") {
+        for line in stdout.split('\n') {
             let is_mapln = line.chars().count() > 3 && (&line[..3]).parse::<f64>().is_ok();
             if line.starts_with("Plateau") {
                 data.push(vec![]);
