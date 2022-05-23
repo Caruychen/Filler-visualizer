@@ -39,7 +39,7 @@ COPY --from=builder /etc/group /etc/group
 WORKDIR /filler-vizualizer
 
 # Copy our build
-COPY --from=builder /filler-vizualizer/target/x86_64-unknown-linux-musl/release/filler-vizualizer ./
+COPY --from=builder /filler-vizualizer/target/x86_64-unknown-linux-musl/release/main ./
 
 # Use an unprivileged user.
 USER filler-vizualizer:filler-vizualizer
