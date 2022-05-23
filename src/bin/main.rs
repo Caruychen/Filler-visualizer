@@ -9,8 +9,8 @@ use regex::Regex;
 use json;
 
 fn main() {
-	println!("{}", env::var("PORT").unwrap());
-	let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
+	let port = env::var("PORT").unwrap().to_owned();
+	let listener = TcpListener::bind(format!("0.0.0.0:{}", port)).unwrap();
 	let pool = ThreadPool::new(4);
 
 	for stream in listener.incoming() {
