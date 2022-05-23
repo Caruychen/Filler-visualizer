@@ -40,8 +40,9 @@ WORKDIR /filler-vizualizer
 
 # Copy our build
 COPY --from=builder /filler-vizualizer/target/x86_64-unknown-linux-musl/release/main ./
+COPY --from=builder /filler-vizualizer/assets ./
 
 # Use an unprivileged user.
 USER filler-vizualizer:filler-vizualizer
 
-CMD ["/filler-vizualizer/filler-vizualizer"]
+CMD ["/main"]
