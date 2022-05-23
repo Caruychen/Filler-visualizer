@@ -1,14 +1,10 @@
-####################################################################################################
-## Builder
-####################################################################################################
-FROM rust:latest AS builder
+# 1. This tells docker to use the Rust official image
+FROM rust:1.60 as build
 
-RUN rustup target add x86_64-unknown-linux-musl
-RUN apt update && apt install -y musl-tools musl-dev
 RUN update-ca-certificates
 
 # Create appuser
-ENV USER=filler-vizualizer
+ENV USER=filler
 ENV UID=10001
 
 RUN adduser \
@@ -20,29 +16,28 @@ RUN adduser \
     --uid "${UID}" \
     "${USER}"
 
-
-WORKDIR /filler-vizualizer
+WORKDIR /filler
 
 COPY ./ .
 
-RUN cargo build --target x86_64-unknown-linux-musl --release
+RUN cargo build --release
 
-####################################################################################################
-## Final image
-####################################################################################################
-FROM alpine:latest
+###
+ # Final Build
+###
+FROM gcr.io/distroless/cc
 
 # Import from builder.
-COPY --from=builder /etc/passwd /etc/passwd
-COPY --from=builder /etc/group /etc/group
+COPY --from=build /etc/passwd /etc/passwd
+COPY --from=build /etc/group /etc/group
 
-WORKDIR /filler-vizualizer
+WORKDIR /filler
 
-# Copy our build
-COPY --from=builder /filler-vizualizer/target/x86_64-unknown-linux-musl/release/main ./
-COPY --from=builder /filler-vizualizer/assets ./
+ENV PORT=7878
+COPY --from=build /filler/target/release/main ./
+COPY --from=build /filler/assets ./assets
+COPY --from=build /filler/public ./public
 
-# Use an unprivileged user.
-USER filler-vizualizer:filler-vizualizer
+USER filler:filler
 
-CMD ["/main"]
+CMD ["/filler/main"]
