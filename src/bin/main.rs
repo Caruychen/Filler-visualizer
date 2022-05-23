@@ -2,12 +2,14 @@ use std::io::prelude::*;
 use std::net::TcpListener;
 use std::net::TcpStream;
 use std::fs;
+use std::env;
 use filler::ThreadPool;
 use filler::arena::Arena;
 use regex::Regex;
 use json;
 
 fn main() {
+	println!("{}", env::var("PORT").unwrap());
 	let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
 	let pool = ThreadPool::new(4);
 
