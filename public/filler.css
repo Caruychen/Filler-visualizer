@@ -1,0 +1,93 @@
+button {
+	cursor: pointer;
+}
+
+h1, h2 {
+	text-align: center;
+}
+
+.content {
+	width: 100%;
+	margin: auto;
+	background: white;
+	padding: 10px;
+}
+
+.arena {
+	display: flex;
+	justify-content: center;
+}
+
+.grid-container {
+	position: relative;
+	display: grid;
+	width: 80vmin;
+	height: 80vmin;
+	grid-template-columns: repeat(100, 2fr);
+	grid-template-rows: repeat(100, 2fr);
+	padding: 10px;
+	margin: 10px;
+	background-color: grey;
+}
+
+.overlay {
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 2;
+}
+
+.playagain {
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.25s ease-out;
+}
+
+.grid-container:hover > .playagain {
+	visibility: visible;
+	opacity: 1;
+	transition: all 0.25s ease-in;
+}
+
+.overlay > button {
+	border-radius: 30px;
+}
+
+.overlay-text{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 50px;
+	color: black;
+	transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+}
+
+.subtext {
+	font-size: 1rem;
+}
+
+.grid-container > .grid-item {
+	background-color: #E7D4C0;
+}
+
+#loading {
+	display: none;
+}
+
+.player-box {
+	padding: 10px;
+}
+
+.p1 {
+	background-color: #429E9D;
+}
+
+.p2 {
+	background-color: #E98973;
+}
