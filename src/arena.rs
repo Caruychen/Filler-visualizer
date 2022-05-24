@@ -7,6 +7,7 @@ pub struct Arena {
 
 impl Arena {
     fn call_cmd(filler: &str, args: &mut [&str]) -> String {
+	Command::new("ls").output().unwrap();
         let output = Command::new(filler)
             .args(args)
             .stdout(Stdio::piped())

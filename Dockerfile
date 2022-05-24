@@ -34,9 +34,10 @@ COPY --from=build /etc/group /etc/group
 WORKDIR /filler
 
 ENV PORT=7878
+ENV RUST_BACKTRACE=full
 COPY --from=build /filler/target/release/main ./
-COPY --from=build /filler/assets ./assets
-COPY --from=build /filler/public ./public
+COPY ./assets ./assets
+COPY ./public ./public
 
 USER filler:filler
 

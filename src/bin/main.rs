@@ -64,6 +64,7 @@ fn dispatch(buffer: [u8; 1024]) -> (&'static str, String) {
         let caps = re.captures(std::str::from_utf8(&buffer).unwrap()).unwrap();
         let p1 = format!("{}{}", path, caps.get(1).map_or("", |m| m.as_str()));
         let p2 = format!("{}{}", path, caps.get(2).map_or("", |m| m.as_str()));
+	println!("{} {}", p1, p2);
 		let contents = Arena::run("./assets/filler_vm",
 			    &mut ["-f", "assets/map02",
 				"-p1", p1.as_str(),
