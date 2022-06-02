@@ -1,3 +1,9 @@
+html, body {
+	background-color: grey;
+	margin: 0;
+	width: 100%;
+}
+
 button {
 	cursor: pointer;
 }
@@ -9,8 +15,7 @@ h1, h2 {
 .content {
 	width: 100%;
 	margin: auto;
-	background: white;
-	padding: 10px;
+	background: grey;
 }
 
 .arena {
@@ -28,6 +33,7 @@ h1, h2 {
 	padding: 10px;
 	margin: 10px;
 	background-color: grey;
+	border: none;
 }
 
 .overlay {
@@ -74,6 +80,7 @@ h1, h2 {
 
 .grid-container > .grid-item {
 	background-color: #E7D4C0;
+	border: none;
 }
 
 #loading {
